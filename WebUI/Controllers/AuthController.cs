@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using RiseX.Business.Abstract;
-using RiseX.Entities.Dto;
+using Business.Abstract;
+using Entities.Dto;
 using System.Security.Claims;
 
 namespace RiseX.WebUI.Controllers;
@@ -80,10 +80,10 @@ public class AuthController : Controller
 
         var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.Name, user.FirstName),
-                new Claim(ClaimTypes.GivenName, user.LastName),
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new(ClaimTypes.Name, user.FirstName),
+                new(ClaimTypes.GivenName, user.LastName),
+                new(ClaimTypes.Email, user.Email),
+                new(ClaimTypes.NameIdentifier, user.Id.ToString()),
             };
 
         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

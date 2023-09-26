@@ -1,7 +1,7 @@
-﻿using RiseX.Business.Abstract;
-using RiseX.Shared.Utilities.Services;
+﻿using Business.Abstract;
+using Shared.Utilities.Services;
 
-namespace RiseX.WebUI.BackgroundServices;
+namespace WebUI.BackgroundServices;
 
 public class CryptoWorker : BackgroundService
 {

@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace RiseX.Shared.Utilities.Hashing;
+namespace Shared.Utilities.Hashing;
 
 public static class HashingHelper
 {

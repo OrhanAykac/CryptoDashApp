@@ -1,8 +1,8 @@
-﻿using RiseX.Entities.Concrete;
-using RiseX.Entities.Dto;
-using RiseX.Shared.Results;
+﻿using Entities.Concrete;
+using Entities.Dto;
+using Shared.Results;
 
-namespace RiseX.Business.Abstract;
+namespace Business.Abstract;
 public interface IAuthService
 {
     Task<BaseDataResponse<User>> RegisterAsync(UserForRegisterDto model);

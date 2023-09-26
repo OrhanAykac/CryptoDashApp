@@ -1,6 +1,5 @@
-﻿using Dapper.Contrib.Extensions;
-
-namespace RiseX.Entities.Abstract;
+﻿
+namespace Entities.Abstract;
 public abstract class BaseEntity
 {
     [Key]

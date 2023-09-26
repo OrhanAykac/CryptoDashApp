@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace RiseX.Shared.Utilities.Services;
+namespace Shared.Utilities.Services;
 public static class ServiceTool
 {
     public static IServiceProvider ServiceProvider { get; set; }

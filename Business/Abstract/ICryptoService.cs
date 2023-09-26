@@ -1,7 +1,7 @@
-﻿using RiseX.Entities.Dto;
-using RiseX.Shared.Results;
+﻿using Entities.Dto;
+using Shared.Results;
 
-namespace RiseX.Business.Abstract;
+namespace Business.Abstract;
 public interface ICryptoService
 {
     Task<BaseResponse> GetCryptoRateFromApiAsync();

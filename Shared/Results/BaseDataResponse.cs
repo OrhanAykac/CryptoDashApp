@@ -1,4 +1,4 @@
-﻿namespace RiseX.Shared.Results;
+﻿namespace Shared.Results;
 public class BaseDataResponse<T> : BaseResponse
 {
     public T Data { get; set; }

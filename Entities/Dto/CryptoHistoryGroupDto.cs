@@ -1,5 +1,5 @@
 ﻿
-namespace RiseX.Entities.Dto;
+namespace Entities.Dto;
 public class CryptoHistoryGroupDto
 {
     public DateTime StartDate { get; set; }

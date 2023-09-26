@@ -1,10 +1,10 @@
 ﻿using Dapper;
 using Dapper.Contrib.Extensions;
-using RiseX.DataAccess.Abstract;
-using RiseX.Entities.Concrete;
+using DataAccess.Abstract;
+using Entities.Concrete;
 using System.Data;
 
-namespace RiseX.DataAccess.Concrete;
+namespace DataAccess.Concrete;
 public class UserDAL : IUserDAL
 {
     private readonly IDbConnection _dbConnection;

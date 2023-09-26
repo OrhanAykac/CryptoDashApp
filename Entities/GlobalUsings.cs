@@ -1,2 +1,2 @@
 ﻿global using Dapper.Contrib.Extensions;
-global using RiseX.Entities.Abstract;
+global using Entities.Abstract;

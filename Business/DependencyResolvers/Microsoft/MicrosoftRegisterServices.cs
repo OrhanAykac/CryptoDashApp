@@ -1,22 +1,23 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Retry;
-using RiseX.Business.Abstract;
-using RiseX.Business.Concrete;
-using RiseX.DataAccess.Abstract;
-using RiseX.DataAccess.Concrete;
-using RiseX.ExternalServices.CryptoService;
-using RiseX.ExternalServices.CryptoService.CoinAPI;
-using RiseX.Shared.Utilities.Services;
+using Business.Concrete;
+using DataAccess.Abstract;
+using DataAccess.Concrete;
+using ExternalServices.CryptoService;
+using ExternalServices.CryptoService.CoinAPI;
+using Shared.Utilities.Services;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
 using System.Data;
 
-namespace RiseX.WebUI;
+namespace Business.DependencyResolvers.Microsoft;
 
-public static class RegisterServices
+public static class MicrosoftRegisterServices
 {
     public static void ConfigureServices(this IServiceCollection services, IConfiguration configuration)
     {

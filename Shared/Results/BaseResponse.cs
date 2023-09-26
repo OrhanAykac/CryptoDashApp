@@ -1,4 +1,4 @@
-﻿namespace RiseX.Shared.Results;
+﻿namespace Shared.Results;
 public class BaseResponse
 {
     public bool Success { get; set; }
