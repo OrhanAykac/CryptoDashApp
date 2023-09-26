@@ -57,13 +57,18 @@ public class CryptoManager : ICryptoService
             if (endDate.Date > DateTime.UtcNow.Date || endDate < (DateTime)SqlDateTime.MinValue)
                 endDate = DateTime.UtcNow.Date;
 
+
+            var dailyHistories = await _cryptoHistoryDAL.GetDailyCryptoAssetHistoriesAsync(startDate, endDate);
+            var weeklyHistories = await _cryptoHistoryDAL.GetWeeklyCryptoAssetHistoriesAsync(startDate, endDate);
+            var monthlyHistories = await _cryptoHistoryDAL.GetMonthlyCryptoAssetHistoriesAsync(startDate, endDate);
+
             var cryptoHistoryGroup = new CryptoHistoryGroupDto
             {
                 StartDate = startDate,
                 EndDate = endDate,
-                DailyHistories = await _cryptoHistoryDAL.GetDailyCryptoAssetHistoriesAsync(startDate, endDate),
-                WeeklyHistories = await _cryptoHistoryDAL.GetWeeklyCryptoAssetHistoriesAsync(startDate, endDate),
-                MonthlyHistories = await _cryptoHistoryDAL.GetMonthlyCryptoAssetHistoriesAsync(startDate, endDate)
+                DailyHistories = dailyHistories.OrderBy(o => o.CreatedAt).Select(x =>new[] {x.Day,x.Rate }).ToArray(),
+                WeeklyHistories = weeklyHistories.OrderBy(o => o.CreatedAt).Select(x => new[] { x.Week, x.Rate }).ToArray(),
+                MonthlyHistories = monthlyHistories.OrderBy(o => o.CreatedAt).Select(x => new[] { x.Month, x.Rate }).ToArray(),
             };
 
             return new BaseDataResponse<CryptoHistoryGroupDto>(cryptoHistoryGroup, true);

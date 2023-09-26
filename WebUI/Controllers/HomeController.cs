@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RiseX.Business.Abstract;
-using System.Data.SqlTypes;
 
 namespace RiseX.WebUI.Controllers;
 
@@ -16,9 +15,15 @@ public class HomeController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index(DateTime startDate,DateTime endDate)
+    public IActionResult Index()
+    {
+        return View();
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetCryptoChartDatasByDateRange(DateTime startDate, DateTime endDate)
     {
         var result = await _cryptoService.GetCryptoAssetHistoryAsync(startDate, endDate);
-        return View(result);
+        return Json(result);
     }
 }
