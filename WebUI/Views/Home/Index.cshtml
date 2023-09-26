@@ -1,0 +1,97 @@
+﻿@using System.Security.Claims;
+@model BaseDataResponse<CryptoHistoryGroupDto>
+@{
+    ViewData["Title"] = "Crypto Dashboard";
+}
+
+<div>
+    <h6 class="display-4">Hoşgeldin,<strong>@Context.User.FindFirstValue(ClaimTypes.Name)</strong></h6>
+</div>
+
+<div class="row mt-5">
+    <div class="col col-12">
+        <form asp-controller="Home" asp-action="Index" method="get">
+            <input type="date" name="startDate" value="@Model.Data.StartDate.ToString("yyyy-MM-dd")" />
+            <input type="date" name="endDate" value="@Model.Data.EndDate.ToString("yyyy-MM-dd")" />
+            <input type="submit" value="Filtrele" />
+        </form>
+    </div>
+    <div class="col col-sm-12 col-md-6">
+        <div id="daily_chart" style="width: 900px; height: 500px"></div>
+    </div>
+    <div class="col col-sm-12 col-md-6">
+        <div id="weekly_chart" style="width: 900px; height: 500px"></div>
+    </div>
+    <div class="col col-sm-12 col-md-6">
+        <div id="monthly_chart" style="width: 900px; height: 500px"></div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        google.charts.load('current', { 'packages': ['corechart'], 'language': 'tr' });
+        google.charts.setOnLoadCallback(drawDailyChart);
+        google.charts.setOnLoadCallback(drawWeeklyChart);
+        google.charts.setOnLoadCallback(drawMonthlyChart);
+
+        function drawDailyChart() {
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('number', 'Gün');
+            data.addColumn('number', 'Fiyat');
+
+            data.addRows(@Json.Serialize(Model.Data.DailyHistories.OrderBy(o=>o.CreatedAt).Select(s=>new[] {s.Day,s.Rate}).ToArray()));
+
+
+
+            var options = {
+                hAxis: { format: 'short' },
+                title: 'Günlük BTC Fiyatları',
+                curveType: 'function',
+                legend: 'none'
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('daily_chart'));
+
+            chart.draw(data, options);
+        }
+        function drawWeeklyChart() {
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('number', 'Hafta');
+            data.addColumn('number', 'Fiyat');
+
+            data.addRows(@Json.Serialize(Model.Data.WeeklyHistories.OrderBy(o=>o.CreatedAt).Select(s=>new[] {s.Week,s.Rate}).ToArray()));
+
+
+            var options = {
+                hAxis: { format: 'short' },
+                title: 'Haftalık BTC Fiyatları',
+                curveType: 'function',
+                legend: 'none'
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('weekly_chart'));
+
+            chart.draw(data, options);
+        }
+        function drawMonthlyChart() {
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('number', 'Ay');
+            data.addColumn('number', 'Fiyat');
+
+            data.addRows(@Json.Serialize(Model.Data.MonthlyHistories.OrderBy(o=>o.CreatedAt).Select(s=>new[] {s.Month,s.Rate}).ToArray()));
+
+            var options = {
+                title: 'Aylık BTC Fiyatları',
+                curveType: 'function',
+                legend: 'none'
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('monthly_chart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+}
