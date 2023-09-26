@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
-using RiseX.DataAccess.Abstract;
-using RiseX.Entities.Dto;
-using RiseX.ExternalServices.CryptoService;
-using RiseX.Shared.Results;
+using DataAccess.Abstract;
+using Entities.Dto;
+using ExternalServices.CryptoService;
+using Shared.Results;
 using System.Data.SqlTypes;
 
-namespace RiseX.Business.Concrete;
+namespace Business.Concrete;
 public class CryptoManager : ICryptoService
 {
     private readonly ICryptoApiHelper _cryptoApiHelper;

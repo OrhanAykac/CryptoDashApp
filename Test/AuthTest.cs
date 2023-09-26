@@ -1,12 +1,10 @@
-using Microsoft.AspNetCore.Mvc;
+using Business.Abstract;
+using Entities.Concrete;
 using Microsoft.Extensions.DependencyInjection;
-using RiseX.Business.Abstract;
-using RiseX.Entities.Concrete;
-using RiseX.Shared.Results;
-using RiseX.Shared.Utilities.Services;
-using RiseX.WebUI.Controllers;
+using Shared.Results;
+using Shared.Utilities.Services;
 
-namespace RiseX.Test;
+namespace Test;
 
 public class AuthTest
 {
@@ -34,7 +32,7 @@ public class AuthTest
             FirstName = "Orhan",
             LastName = "Aykaç",
             ConfirmPassword = "a.1",
-            Email = $"emailaddress{Random.Shared.Next(1,999)}@gmail.com",
+            Email = $"emailaddress{Random.Shared.Next(1, 999)}@gmail.com",
             Password = "a.1"
         });
         Assert.IsType<BaseDataResponse<User>>(result);

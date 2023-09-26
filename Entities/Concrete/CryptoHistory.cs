@@ -1,4 +1,4 @@
-﻿namespace RiseX.Entities.Concrete;
+﻿namespace Entities.Concrete;
 
 [Table("CryptoHistories")]
 public class CryptoHistory : BaseEntity, IEntity

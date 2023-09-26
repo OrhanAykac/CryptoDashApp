@@ -1,6 +1,6 @@
-﻿using RiseX.Entities.Concrete;
+﻿using Entities.Concrete;
 
-namespace RiseX.DataAccess.Abstract;
+namespace DataAccess.Abstract;
 public interface IUserDAL
 {
     Task<User> GetUserByEmailAsync(string email);

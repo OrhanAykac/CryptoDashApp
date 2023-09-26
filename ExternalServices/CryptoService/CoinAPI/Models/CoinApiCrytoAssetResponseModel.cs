@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RiseX.ExternalServices.CryptoService.CoinAPI.Models;
+namespace ExternalServices.CryptoService.CoinAPI.Models;
 public class CoinApiCrytoAssetResponseModel
 {
     [JsonPropertyName("time")]

@@ -1,4 +1,4 @@
-﻿namespace RiseX.ExternalServices.Models;
+﻿namespace ExternalServices.Models;
 public class CryptoApiResponseModel
 {
     public string CryptoCurrencyCode { get; set; }

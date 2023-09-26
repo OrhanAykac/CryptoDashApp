@@ -1,10 +1,11 @@
 ﻿@using System.Security.Claims;
+@using Microsoft.IdentityModel.JsonWebTokens;
 @{
     ViewData["Title"] = "Crypto Dashboard";
 }
 
 <div>
-    <h6 class="display-4">Hoşgeldin,<strong>@Context.User.FindFirstValue(ClaimTypes.Name)</strong></h6>
+    <h6 class="display-4">Hoşgeldin,<strong>@Context.User.FindFirstValue(JwtRegisteredClaimNames.Name)</strong></h6>
 </div>
 
 <div class="row mt-5">

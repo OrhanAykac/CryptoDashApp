@@ -1,11 +1,11 @@
 ﻿using Dapper;
 using Dapper.Contrib.Extensions;
-using RiseX.DataAccess.Abstract;
-using RiseX.Entities.Concrete;
-using RiseX.Entities.Dto;
+using DataAccess.Abstract;
+using Entities.Concrete;
+using Entities.Dto;
 using System.Data;
 
-namespace RiseX.DataAccess.Concrete;
+namespace DataAccess.Concrete;
 public class CryptoHistoryDAL : ICryptoHistoryDAL
 {
     private readonly IDbConnection _dbConnection;

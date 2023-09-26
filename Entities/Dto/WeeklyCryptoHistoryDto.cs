@@ -1,4 +1,4 @@
-﻿namespace RiseX.Entities.Dto;
+﻿namespace Entities.Dto;
 
 public class WeeklyCryptoHistoryDto
 {
