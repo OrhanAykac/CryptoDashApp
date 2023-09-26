@@ -1,5 +1,4 @@
-﻿using Entities.Dto;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using RiseX.DataAccess.Abstract;
 using RiseX.Entities.Dto;
 using RiseX.ExternalServices.CryptoService;
