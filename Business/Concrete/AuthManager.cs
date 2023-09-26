@@ -1,11 +1,11 @@
-﻿using Microsoft.Extensions.Logging;
-using RiseX.DataAccess.Abstract;
-using RiseX.Entities.Concrete;
-using RiseX.Entities.Dto;
-using RiseX.Shared.Results;
-using RiseX.Shared.Utilities.Hashing;
+﻿using DataAccess.Abstract;
+using Entities.Concrete;
+using Entities.Dto;
+using Microsoft.Extensions.Logging;
+using Shared.Results;
+using Shared.Utilities.Hashing;
 
-namespace RiseX.Business.Concrete;
+namespace Business.Concrete;
 public class AuthManager : IAuthService
 {
     private readonly IUserDAL _userDAL;

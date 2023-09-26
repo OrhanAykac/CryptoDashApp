@@ -1,6 +1,6 @@
-﻿using RiseX.ExternalServices.Models;
+﻿using ExternalServices.Models;
 
-namespace RiseX.ExternalServices.CryptoService;
+namespace ExternalServices.CryptoService;
 public interface ICryptoApiHelper
 {
     Task<CryptoApiResponseModel> GetCryptoAssetRateAsync(string baseCurrencyCode = "USD", string cryptoCurrencyCode = "BTC");

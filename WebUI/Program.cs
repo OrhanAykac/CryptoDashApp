@@ -1,8 +1,8 @@
+using Business.DependencyResolvers.Microsoft;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using RiseX.Shared.Utilities.Services;
-using RiseX.WebUI;
-using RiseX.WebUI.BackgroundServices;
 using Serilog;
+using WebUI.BackgroundServices;
+using WebUI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,13 +13,13 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         options.LoginPath = "/auth/login";
         options.LogoutPath = "/auth/logout";
-        options.Cookie.Name = "risex.auth";
+        options.Cookie.Name = "cryptodash.auth";
         options.ReturnUrlParameter = "returnUrl";
-        options.ExpireTimeSpan=TimeSpan.FromDays(1);
+        options.ExpireTimeSpan = TimeSpan.FromDays(1);
     });
 
 builder.Services.ConfigureServices(builder.Configuration);
-
+builder.Services.AddScoped<IAuthApiService, AuthApiService>();
 
 
 builder.Services.AddHostedService<CryptoWorker>();

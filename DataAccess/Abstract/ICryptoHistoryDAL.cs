@@ -1,7 +1,7 @@
-﻿using RiseX.Entities.Concrete;
-using RiseX.Entities.Dto;
+﻿using Entities.Concrete;
+using Entities.Dto;
 
-namespace RiseX.DataAccess.Abstract;
+namespace DataAccess.Abstract;
 public interface ICryptoHistoryDAL
 {
     Task<int> InsertAsync(CryptoHistory model);

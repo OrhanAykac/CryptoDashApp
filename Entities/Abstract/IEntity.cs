@@ -1,4 +1,4 @@
-﻿namespace RiseX.Entities.Abstract;
+﻿namespace Entities.Abstract;
 public interface IEntity
 {
 }

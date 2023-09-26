@@ -1,1 +1,1 @@
-﻿global using RiseX.Business.Abstract;
+﻿global using Business.Abstract;

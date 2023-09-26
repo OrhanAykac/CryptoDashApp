@@ -1,4 +1,4 @@
-﻿namespace RiseX.Entities.Concrete;
+﻿namespace Entities.Concrete;
 
 [Table("Users")]
 public class User : BaseEntity, IEntity

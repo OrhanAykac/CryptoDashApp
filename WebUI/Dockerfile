@@ -10,7 +10,7 @@ COPY ["Business/Business.csproj", "Business/"]
 COPY ["DataAccess/DataAccess.csproj", "DataAccess/"]
 COPY ["Entities/Entities.csproj", "Entities/"]
 COPY ["ExternalServices/ExternalServices.csproj", "ExternalServices/"]
-COPY ["Shared/Shared.csproj", "RiseX.Shared/"]
+COPY ["Shared/Shared.csproj", "Shared/"]
 RUN dotnet restore "WebUI/WebUI.csproj"
 COPY . .
 WORKDIR "/src/WebUI"

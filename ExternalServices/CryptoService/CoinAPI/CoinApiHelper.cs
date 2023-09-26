@@ -1,8 +1,8 @@
-﻿using RiseX.ExternalServices.CryptoService.CoinAPI.Models;
-using RiseX.ExternalServices.Models;
+﻿using ExternalServices.CryptoService.CoinAPI.Models;
+using ExternalServices.Models;
 using System.Net.Http.Json;
 
-namespace RiseX.ExternalServices.CryptoService.CoinAPI;
+namespace ExternalServices.CryptoService.CoinAPI;
 public class CoinApiHelper : ICryptoApiHelper
 {
     private readonly IHttpClientFactory _httpClientFactory;

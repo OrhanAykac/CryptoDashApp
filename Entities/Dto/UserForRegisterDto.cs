@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RiseX.Entities.Dto;
+namespace Entities.Dto;
 public class UserForRegisterDto
 {
     [Required, MinLength(3), MaxLength(32)]
