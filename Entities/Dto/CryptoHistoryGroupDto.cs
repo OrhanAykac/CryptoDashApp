@@ -1,5 +1,4 @@
-﻿using Entities.Dto;
-
+﻿
 namespace RiseX.Entities.Dto;
 public class CryptoHistoryGroupDto
 {
