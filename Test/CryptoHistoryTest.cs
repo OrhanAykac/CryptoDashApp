@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using RiseX.Business.Abstract;
-using RiseX.Entities.Dto;
-using RiseX.Shared.Results;
-using RiseX.Shared.Utilities.Services;
+using Business.Abstract;
+using Entities.Dto;
+using Shared.Results;
+using Shared.Utilities.Services;
 
-namespace RiseX.Test;
+namespace Test;
 public class CryptoHistoryTest
 {
     private readonly ICryptoService _cryptoService;

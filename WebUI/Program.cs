@@ -1,9 +1,8 @@
 using Business.DependencyResolvers.Microsoft;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Shared.Utilities.Services;
-using WebUI;
-using WebUI.BackgroundServices;
 using Serilog;
+using WebUI.BackgroundServices;
+using WebUI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,11 +15,11 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LogoutPath = "/auth/logout";
         options.Cookie.Name = "cryptodash.auth";
         options.ReturnUrlParameter = "returnUrl";
-        options.ExpireTimeSpan=TimeSpan.FromDays(1);
+        options.ExpireTimeSpan = TimeSpan.FromDays(1);
     });
 
 builder.Services.ConfigureServices(builder.Configuration);
-
+builder.Services.AddScoped<IAuthApiService, AuthApiService>();
 
 
 builder.Services.AddHostedService<CryptoWorker>();

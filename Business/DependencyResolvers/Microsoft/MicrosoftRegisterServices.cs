@@ -29,6 +29,12 @@ public static class MicrosoftRegisterServices
             config.DefaultRequestHeaders.Add("X-CoinAPI-Key", configuration["CoinApi:ApiKey"]);
         }).AddPolicyHandler(GetRetryPolicy());
 
+
+        services.AddHttpClient("AuthApi", config =>
+        {
+            config.BaseAddress = new Uri(configuration["Api.AuthUrl"]);
+        }).AddPolicyHandler(GetRetryPolicy());
+
         services.AddHttpContextAccessor();
 
         ConfigureIoC(services);

@@ -1,21 +1,23 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Entities.Dto;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using Business.Abstract;
-using Entities.Dto;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using WebUI.Services;
 
-namespace RiseX.WebUI.Controllers;
+namespace WebUI.Controllers;
 
 [Route("auth")]
 public class AuthController : Controller
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
-    private readonly IAuthService _authService;
-    public AuthController(IHttpContextAccessor httpContextAccessor, IAuthService authService)
+    private readonly IAuthApiService _authApiService;
+
+    public AuthController(IHttpContextAccessor httpContextAccessor, IAuthApiService authApiService)
     {
+        _authApiService = authApiService;
         _httpContextAccessor = httpContextAccessor;
-        _authService = authService;
     }
 
     [HttpGet("login")]
@@ -26,7 +28,7 @@ public class AuthController : Controller
     [HttpGet("logout")]
     public async Task<IActionResult> Logout()
     {
-        await _httpContextAccessor.HttpContext.SignOutAsync();
+        await LogoutUser();
         return Redirect("/auth/login");
     }
 
@@ -44,7 +46,7 @@ public class AuthController : Controller
         if (ModelState.IsValid == false)
             return View(model);
 
-        var result = await _authService.LoginAsync(model);
+        var result = await _authApiService.LoginAsync(model);
 
         if (result.Success == true)
         {
@@ -62,7 +64,7 @@ public class AuthController : Controller
         if (ModelState.IsValid == false)
             return View(model);
 
-        var result = await _authService.RegisterAsync(model);
+        var result = await _authApiService.RegisterAsync(model);
 
         if (result.Success == true)
         {
@@ -75,22 +77,36 @@ public class AuthController : Controller
     }
 
 
-    private async Task SignInUser(Entities.Concrete.User user)
+    private async Task LogoutUser()
     {
-
-        var claims = new List<Claim>()
-            {
-                new(ClaimTypes.Name, user.FirstName),
-                new(ClaimTypes.GivenName, user.LastName),
-                new(ClaimTypes.Email, user.Email),
-                new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            };
-
-        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-        await _httpContextAccessor.HttpContext.SignInAsync(
-            CookieAuthenticationDefaults.AuthenticationScheme,
-            new ClaimsPrincipal(claimsIdentity));
+        _httpContextAccessor.HttpContext
+            ?.Response.Cookies.Delete("tokenCookie");
+        await _httpContextAccessor.HttpContext.SignOutAsync();
     }
+
+
+    private async Task SignInUser(string token)
+    {
+        var handler = new JwtSecurityTokenHandler();
+
+        var jwt = handler.ReadJwtToken(token);
+
+        var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+
+        identity.AddClaim(new Claim(JwtRegisteredClaimNames.Email,
+            jwt.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Email).Value));
+
+        identity.AddClaim(new Claim(JwtRegisteredClaimNames.Sub,
+            jwt.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Sub).Value));
+
+        identity.AddClaim(new Claim(JwtRegisteredClaimNames.Name,
+            jwt.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Name).Value));
+
+        _httpContextAccessor.HttpContext?.Response.Cookies.Append("tokenCookie", token);
+
+        var principal = new ClaimsPrincipal(identity);
+        await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+    }
+
 
 }

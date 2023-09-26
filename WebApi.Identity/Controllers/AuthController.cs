@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Business.Abstract;
+using Entities.Dto;
+using WebApi.Identity.Services;
+using Shared.Results;
 
 namespace WebApi.Identity.Controllers;
 
@@ -14,15 +17,31 @@ public class AuthController : ControllerBase
         _authService = authService;
     }
 
-    [HttpPost]
-    public IActionResult Login()
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] UserForLoginDto userForLogin)
     {
-        return Ok();
+
+        var result = await _authService.LoginAsync(userForLogin);
+
+        if (result.Success == true)
+        {
+            var token = JwtTokenHelper.CreateToken(result.Data);
+            return Ok(new BaseDataResponse<string>(token,true));
+        }
+        return BadRequest(new BaseResponse(false, result.Message));
     }
 
     [HttpPost("register")]
-    public IActionResult Register()
+    public async Task<IActionResult> Register([FromBody] UserForRegisterDto userForRegister)
     {
-        return Ok();
+        var result = await _authService.RegisterAsync(userForRegister);
+
+        if (result.Success == true)
+        {
+            var token = JwtTokenHelper.CreateToken(result.Data);
+            return Ok(new BaseDataResponse<string>(token,true));
+        }
+        return BadRequest(new BaseResponse(false, result.Message));
+
     }
 }

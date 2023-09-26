@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RiseX.Business.Abstract;
+using Business.Abstract;
 
-namespace RiseX.WebUI.Controllers;
+namespace WebUI.Controllers;
 
 [Authorize]
 public class HomeController : Controller
