@@ -4,6 +4,7 @@ using Entities.Dto;
 using ExternalServices.CryptoService;
 using Shared.Results;
 using System.Data.SqlTypes;
+using Business.Abstract;
 
 namespace Business.Concrete;
 public class CryptoManager : ICryptoService

@@ -14,7 +14,7 @@ public static class JwtTokenHelper
     public static string CreateToken(User user)
     {
         IConfiguration _configuration = ServiceTool.ServiceProvider.GetRequiredService<IConfiguration>();
-        var tokenOptions = _configuration.GetSection("ApiSettings:TokenOptions").Get<TokenOptions>();
+        var tokenOptions = _configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
         JwtSecurityTokenHandler tokenHandler = new();
 
