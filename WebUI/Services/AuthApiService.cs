@@ -25,7 +25,7 @@ public class AuthApiService : IAuthApiService
         else
         {
             var errorContent = await result.Content.ReadFromJsonAsync<BaseResponse>();
-            return new BaseDataResponse<string>(errorContent.Message, false);
+            return new BaseDataResponse<string>("",false,errorContent.Message);
         }
     }
     public async Task<BaseDataResponse<string>> RegisterAsync(UserForRegisterDto userForRegister)
@@ -41,7 +41,7 @@ public class AuthApiService : IAuthApiService
         else
         {
             var errorContent = await result.Content.ReadFromJsonAsync<BaseResponse>();
-            return new BaseDataResponse<string>(errorContent.Message, false);
+            return new BaseDataResponse<string>("",false,errorContent.Message);
         }
     }
 }

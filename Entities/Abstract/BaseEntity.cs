@@ -1,8 +1,11 @@
 ﻿
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Entities.Abstract;
 public abstract class BaseEntity
 {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     public bool IsActive { get; set; } = true;
     public bool IsDeleted { get; set; } = false;

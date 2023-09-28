@@ -1,27 +1,25 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
-EXPOSE 7001
-EXPOSE 7002
+EXPOSE 7004
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["WebUI/WebUI.csproj", "WebUI/"]
+COPY ["WebApi.Identity/WebApi.Identity.csproj", "WebApi.Identity/"]
 COPY ["Business/Business.csproj", "Business/"]
 COPY ["DataAccess/DataAccess.csproj", "DataAccess/"]
 COPY ["Entities/Entities.csproj", "Entities/"]
 COPY ["ExternalServices/ExternalServices.csproj", "ExternalServices/"]
 COPY ["Shared/Shared.csproj", "Shared/"]
-RUN dotnet restore "WebUI/WebUI.csproj"
+RUN dotnet restore "WebApi.Identity/WebApi.Identity.csproj"
 COPY . .
-WORKDIR "/src/WebUI"
-RUN dotnet build "WebUI.csproj" -c Release -o /app/build
+WORKDIR "/src/WebApi.Identity"
+RUN dotnet build "WebApi.Identity.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "WebUI.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "WebApi.Identity.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "WebUI.dll"]
+ENTRYPOINT ["dotnet", "WebApi.Identity.dll"]

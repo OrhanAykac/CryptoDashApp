@@ -1,0 +1,34 @@
+version: '3.4'
+name: crypto_dashboard
+
+services:
+  webui:
+    image: ${DOCKER_REGISTRY-}webui
+    ports:
+      - "7001:7001"
+      - "7002:7002"    
+    build:
+      context: .
+      dockerfile: WebUI/Dockerfile
+    depends_on:
+      - webapi.identity
+
+  webapi.identity:
+    image: ${DOCKER_REGISTRY-}webapiidentity
+    ports:
+      - "7003:7003"
+      - "7004:7004"
+    build:
+      context: .
+      dockerfile: WebApi.Identity/Dockerfile
+    depends_on:
+        - sql_server
+
+  sql_server:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - MSSQL_SA_PASSWORD=Top.,17*-Secret
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"

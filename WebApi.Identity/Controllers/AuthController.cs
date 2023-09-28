@@ -28,7 +28,7 @@ public class AuthController : ControllerBase
             var token = JwtTokenHelper.CreateToken(result.Data);
             return Ok(new BaseDataResponse<string>(token,true));
         }
-        return BadRequest(new BaseResponse(false, result.Message));
+        return BadRequest(new BaseDataResponse<string>("",false, result.Message));
     }
 
     [HttpPost("register")]
@@ -41,7 +41,7 @@ public class AuthController : ControllerBase
             var token = JwtTokenHelper.CreateToken(result.Data);
             return Ok(new BaseDataResponse<string>(token,true));
         }
-        return BadRequest(new BaseResponse(false, result.Message));
+        return BadRequest(new BaseDataResponse<string>("",false, result.Message));
 
     }
 }

@@ -18,7 +18,7 @@ public class CryptoWorker : BackgroundService
         //It will wait until nex tick and then execute even at first run.
         PeriodicTimer periodicTimer = new(TimeSpan.FromMinutes(1));
 
-        while (stoppingToken.IsCancellationRequested == false && await periodicTimer.WaitForNextTickAsync(stoppingToken))
+        while (stoppingToken.IsCancellationRequested == false)
         {
             try
             {
@@ -30,6 +30,10 @@ public class CryptoWorker : BackgroundService
             catch (Exception ex)
             {
                 _logger.LogError(ex, "{message}", ex.Message);
+            }
+            finally
+            {
+                await periodicTimer.WaitForNextTickAsync(stoppingToken);
             }
         }
     }
