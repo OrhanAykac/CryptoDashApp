@@ -6,17 +6,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:6002"
-    },
-    "Docker": {
-      "commandName": "Docker",
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_URLS": "http://+:6002"
-      },
-      "publishAllPorts": true,
-      "useSSL": false
+      "applicationUrl": "http://localhost:6003;https://localhost:6004"
     }
   },
   "$schema": "https://json.schemastore.org/launchsettings.json"

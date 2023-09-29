@@ -3,13 +3,9 @@
     "Docker Compose": {
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
-      "composeLaunchAction": "LaunchBrowser",
-      "composeLaunchServiceName": "webui",
-      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}",
       "serviceActions": {
         "webui": "StartDebugging",
-        "webapi.identity": "StartWithoutDebugging",
-        "sql_server": "StartWithoutDebugging"
+        "webapi.identity": "StartDebugging"
       }
     }
   }

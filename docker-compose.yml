@@ -1,26 +1,25 @@
 version: '3.4'
-name: crypto_dashboard
 
 services:
   webui:
     image: ${DOCKER_REGISTRY-}webui
     ports:
-      - "6001:7001"
+      - 5001:8080
     build:
       context: .
       dockerfile: WebUI/Dockerfile
-    depends_on:
+    depends_on: 
       - webapi.identity
 
   webapi.identity:
     image: ${DOCKER_REGISTRY-}webapiidentity
     ports:
-      - "6002:7002"
+      - 5003:80
     build:
       context: .
       dockerfile: WebApi.Identity/Dockerfile
     depends_on:
-        - sql_server
+      - sql_server
 
   sql_server:
     image: mcr.microsoft.com/mssql/server:2022-latest
