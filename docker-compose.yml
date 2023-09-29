@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  webui:
+    image: ${DOCKER_REGISTRY-}webui
+    ports:
+      - 5001:8080
+    build:
+      context: .
+      dockerfile: WebUI/Dockerfile
+    depends_on: 
+      - webapi.identity
+
+  webapi.identity:
+    image: ${DOCKER_REGISTRY-}webapiidentity
+    ports:
+      - 5003:80
+    build:
+      context: .
+      dockerfile: WebApi.Identity/Dockerfile
+    depends_on:
+      - sql_server
+
+  sql_server:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - MSSQL_SA_PASSWORD=Top.,17*-Secret
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"

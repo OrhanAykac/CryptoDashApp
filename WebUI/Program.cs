@@ -1,5 +1,7 @@
 using Business.DependencyResolvers.Microsoft;
+using DataAccess.Contexts;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using WebUI.BackgroundServices;
 using WebUI.Services;
@@ -45,5 +47,18 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+CheckDbContextMigrations();
 app.Run();
+
+
+//Veritabanýnýn migrationlarýný kontrol eder ve yoksa oluþturur.
+void CheckDbContextMigrations()
+{
+    using var scope = app.Services.CreateScope();
+
+    var hasMigration = scope.ServiceProvider.GetRequiredService<CryptoDashContext>().Database.GetPendingMigrations().Any();
+    if (hasMigration == true)
+    {
+        scope.ServiceProvider.GetRequiredService<CryptoDashContext>().Database.Migrate();
+    }
+}

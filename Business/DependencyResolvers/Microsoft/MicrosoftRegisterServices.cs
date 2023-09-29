@@ -14,7 +14,8 @@ using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
 using System.Data;
-using Business.Abstract;
+using DataAccess.Contexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.DependencyResolvers.Microsoft;
 
@@ -22,8 +23,14 @@ public static class MicrosoftRegisterServices
 {
     public static void ConfigureServices(this IServiceCollection services, IConfiguration configuration)
     {
-
         services.AddTransient<IDbConnection>(sql => new SqlConnection(configuration.GetConnectionString("DefaultConnStr")));
+
+        services.AddDbContext<CryptoDashContext>(options =>
+        {
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnStr"));
+        });
+
+
         services.AddHttpClient("CoinAPI", config =>
         {
             config.BaseAddress = new Uri(configuration["CoinApi:ApiUrl"]);

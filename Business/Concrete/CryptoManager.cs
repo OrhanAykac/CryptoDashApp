@@ -1,10 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
-using DataAccess.Abstract;
+﻿using DataAccess.Abstract;
 using Entities.Dto;
 using ExternalServices.CryptoService;
+using Microsoft.Extensions.Logging;
 using Shared.Results;
 using System.Data.SqlTypes;
-using Business.Abstract;
 
 namespace Business.Concrete;
 public class CryptoManager : ICryptoService
@@ -67,7 +66,7 @@ public class CryptoManager : ICryptoService
             {
                 StartDate = startDate,
                 EndDate = endDate,
-                DailyHistories = dailyHistories.OrderBy(o => o.CreatedAt).Select(x =>new[] {x.Day,x.Rate }).ToArray(),
+                DailyHistories = dailyHistories.OrderBy(o => o.CreatedAt).Select(x => new[] { x.Day, x.Rate }).ToArray(),
                 WeeklyHistories = weeklyHistories.OrderBy(o => o.CreatedAt).Select(x => new[] { x.Week, x.Rate }).ToArray(),
                 MonthlyHistories = monthlyHistories.OrderBy(o => o.CreatedAt).Select(x => new[] { x.Month, x.Rate }).ToArray(),
             };
