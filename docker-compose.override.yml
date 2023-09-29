@@ -4,20 +4,18 @@ services:
   webui:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=http://+:7001;https://+:7002
+      - ASPNETCORE_URLS=http://+:6001
     ports:
-      - "7001"
-      - "7002" 
+      - "6001"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
   webapi.identity:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=http://+:7003;https://+:7004
+      - ASPNETCORE_URLS=http://+:6002
     ports:
-      - "7003"
-      - "7004"
+      - "6002"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

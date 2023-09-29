@@ -5,8 +5,7 @@ services:
   webui:
     image: ${DOCKER_REGISTRY-}webui
     ports:
-      - "7001:7001"
-      - "7002:7002"    
+      - "6001:7001"
     build:
       context: .
       dockerfile: WebUI/Dockerfile
@@ -16,8 +15,7 @@ services:
   webapi.identity:
     image: ${DOCKER_REGISTRY-}webapiidentity
     ports:
-      - "7003:7003"
-      - "7004:7004"
+      - "6002:7002"
     build:
       context: .
       dockerfile: WebApi.Identity/Dockerfile
